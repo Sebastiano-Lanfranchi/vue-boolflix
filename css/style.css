@@ -6,17 +6,27 @@
 #root{
   margin: 0 auto;
   width: 1800px;
-}
 
+}
+/* BODY */
+.bodyCar{
+    background-image: linear-gradient(to bottom, #1f2026, #000000);
+}
 /* HEADER */
 #siteName,
 .navSearch{
   text-align: center;
 }
 
+#siteName{
+  color: #E50914;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+
+}
+
 /* STILI ANTEPRIMA FILMS */
 .containerAnteprima{
-  height: auto;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -25,6 +35,11 @@
 .dimensioniAnteprima{
   height: 400px;
   width: 300px;
-  background-color: #56afbf;
+  opacity: 0.8;
   margin: 10px;
+  filter: drop-shadow(0 0 0.75rem crimson);
+}
+
+.textBox{
+
 }
