@@ -1,0 +1,30 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+#root{
+  margin: 0 auto;
+  width: 1800px;
+}
+
+/* HEADER */
+#siteName,
+.navSearch{
+  text-align: center;
+}
+
+/* STILI ANTEPRIMA FILMS */
+.containerAnteprima{
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.dimensioniAnteprima{
+  height: 400px;
+  width: 300px;
+  background-color: #56afbf;
+  margin: 10px;
+}

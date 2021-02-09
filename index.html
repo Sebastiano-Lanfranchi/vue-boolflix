@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Boolfix</title>
+    <!-- CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <!-- APERTURA DIV ROOT -->
+    <div id="root">
+      <!-- HEADER NAV SELECT -->
+      <header>
+        <h1 id="siteName">BoolFixSeb</h1>
+        <input class="navSearch" type="text" v-model="searchMovie" name="" value="" @keyup.enter="searchFunction">
+      </header>
+      <!-- INSIEME FILM TROVATI -->
+      <div class="containerAnteprima">
+        <div class="dimensioniAnteprima" v-for="film in arraySearches">
+          <div class="imgResize" >
+            <img  :src="arrayConfiguration.base_url + 'w300' + film.backdrop_path" alt="">
+          </div>
+         <div class="titleOriginal">Titolo originale:{{film.original_title}}</div>
+         <div class="title">Titolo:{{film.title}}</div>
+         <div class="leanguage">Lingua originale:{{film.original_language}}</div>
+         <div class="vote">Voto:{{film.vote_average}}</div>
+        </div>
+      </div>
+
+    </div>
+    <script src="js/script.js" charset="utf-8"></script>
+  </body>
+</html>
