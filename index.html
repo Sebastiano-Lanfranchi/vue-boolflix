@@ -19,7 +19,7 @@
         <img src="img/logo.png" alt="">
       </div>
       <input class="navSearch" type="text" v-model="searchMovie" name="" value="" @keyup.enter="searchFunction">
-      <input type="button" name="" value="Search" @click="searchFunction">
+      <input class="searchButton" type="button" name="" value="Search" @click="searchFunction">
       <!-- SELECT TYPOLOGY -->
       <select class="selectTypology" v-model="selectTypology" @click="filterTypology()" name="">
         <option value="ALL">ALL</option>
@@ -53,9 +53,9 @@
             </template>
             <div class="vote "><i id="starVote" v-for="(star, index) in arrayStar " class="fas fa-star"> </i>
           </div>
-        </div>
-        <div class="overview">
-          {{film.overview}}
+          <div class="overview">
+            {{film.overview}}
+          </div>
         </div>
 
       </div>

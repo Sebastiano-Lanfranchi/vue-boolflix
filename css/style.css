@@ -21,6 +21,24 @@
   text-align: center;
 }
 
+.navSearch{
+  background-color: #dc1a28;
+  font-weight: bolder;
+}
+
+.searchButton{
+  border-radius: 5px;
+  background-color: #dc1a28;
+  font-weight: bold;
+  width: 60px;
+}
+
+.selectTypology{
+  border-radius: 5px;
+  background-color: #dc1a28;
+  font-weight: bold;
+}
+
 #siteName,
 .navSearch{
   text-align: center;
@@ -37,12 +55,13 @@
   display: flex;
   flex-direction: row;
   overflow: auto;
+  margin-top: 100px;
 }
 
 .imagesCover{
   border-radius: 3px;
   transition: 0.5s;
-  position: static;
+  position: absolute;
 }
 
 .imagesCover:hover{
@@ -50,10 +69,13 @@
 }
 
 .textBox{
+  max-height: 300px;
+  min-width: 500px;
+  max-width: 500px;
 }
 
 .dimensioniAnteprima{
-  height: 500px;
+  height: 281px;
   min-width: 500px;
   max-width: 500px;
   opacity: 0.8;
@@ -62,8 +84,33 @@
   color: #ccc;
   overflow-y: auto;
   overflow-x: hidden;
+  position: relative;
 }
 
 .starActive{
   color: yellow,
 }
+
+/* SCROLL BAR */
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #dc1a28;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #000000;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+</style>
