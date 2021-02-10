@@ -2,7 +2,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  text-colo
 }
 #root{
   margin: 0 auto;
@@ -42,11 +41,21 @@
 
 .imagesCover{
   border-radius: 3px;
+  transition: 0.5s;
+  position: static;
+}
+
+.imagesCover:hover{
+  opacity: 0;
+}
+
+.textBox{
 }
 
 .dimensioniAnteprima{
   height: 500px;
   min-width: 500px;
+  max-width: 500px;
   opacity: 0.8;
   margin: 10px;
   box-shadow: #000000 1px 2px ;
