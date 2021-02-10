@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Boolfix</title>
     <!-- CDN -->
+    <script src="https://kit.fontawesome.com/35b3b34844.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.2/handlebars.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
@@ -17,21 +18,38 @@
         <h1 id="siteName">BOOLFIXSEB</h1>
         <input class="navSearch" type="text" v-model="searchMovie" name="" value="" @keyup.enter="searchFunction">
         <input type="button" name="" value="Search" @click="searchFunction">
-        <select class="select." name="">
-
+        <!-- SELECT TYPOLOGY -->
+        <select class="selectTypology" v-model="selectTypology" @click="filterTypology()" name="">
+          <option value="ALL">ALL</option>
+          <option v-for="typology in arrayTypology">{{typology}}</option>
         </select>
       </header>
       <!-- INSIEME FILM TROVATI -->
       <div class="containerAnteprima">
-        <div class="dimensioniAnteprima" v-for="film in arraySearches">
+        <div class="dimensioniAnteprima" v-for="film in arraySearches" v-if="film.media_type === selectTypology || selectTypology === 'ALL'">
           <div class="imgResize" >
-            <img  :src="arrayConfiguration.base_url + 'w300' + film.backdrop_path" alt="">
+            <img  :src="arrayConfiguration.base_url + 'w500' + film.backdrop_path" alt="">
           </div>
           <div class="textBox">
             <div class="titleOriginal">Titolo originale:{{film.original_title}}</div>
             <div class="title">Titolo:{{film.title}}</div>
-            <div class="leanguage">Lingua originale:{{film.original_language}}</div>
-            <div class="vote">Voto:{{film.vote_average}}</div>
+            <!-- SEZIONE BANDIERE -->
+            <div class="leanguage">
+              <p>Lingua originale:</p>
+              <template v-if="film.original_language==='en'">
+                <img :src="flagsLink + 'gb' + '/flat'+'/16.png'"></div>
+              </template>
+              <template v-else-if="film.original_language==='ja'">
+                <img :src="flagsLink + 'jp' + '/flat'+'/16.png'"></div>
+              </template>
+              <template v-else>
+                <img :src="flagsLink + film.original_language + '/flat'+'/16.png'"></div>
+              </template>
+            <!-- SEZIONE VOTO -->
+            <template v-if="Math.round(film.vote_avarage)/2==1">
+              <i id="starVote" v-for="(star, index) in arrayStar " class="fas fa-star"> </i>
+            </template>
+            <div class="vote "><i id="starVote" v-for="(star, index) in arrayStar " class="fas fa-star"> </i></div>
           </div>
         </div>
       </div>
