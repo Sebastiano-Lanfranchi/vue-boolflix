@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  text-colo
 }
 #root{
   margin: 0 auto;
@@ -10,12 +11,17 @@
 }
 /* BODY */
 .bodyCar{
-    /* background-image: linear-gradient(to bottom, #1f2026, #000000); */
-    background-color: #cccccc;
-    background-repeat: no-repeat;
+    background-image: linear-gradient(to bottom, #1f2026, #000000);
+    background-attachment:fixed;
+    height:100%;
 
 }
 /* HEADER */
+
+.logo{
+  text-align: center;
+}
+
 #siteName,
 .navSearch{
   text-align: center;
@@ -34,12 +40,19 @@
   overflow: auto;
 }
 
+.imagesCover{
+  border-radius: 3px;
+}
+
 .dimensioniAnteprima{
   height: 500px;
-  width: 500px;
+  min-width: 500px;
   opacity: 0.8;
   margin: 10px;
   box-shadow: #000000 1px 2px ;
+  color: #ccc;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .starActive{

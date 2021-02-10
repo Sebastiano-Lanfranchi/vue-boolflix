@@ -6,6 +6,7 @@ new Vue({
     arraySearches: [],
     arrayTypology: [],
     selectTypology: 'ALL',
+    active: true,
     arrayStar: ['1','2','3', '4', '5'],
     voteStar: 'starActive',
     flagsLink: "https://www.countryflags.io/"
@@ -32,10 +33,11 @@ new Vue({
           this.arrayTypology.push(item.media_type)
         }
     });
+  },
+    mouseOver: function(){
+      this.active = false;
     }
-
-
-
 },
+
 })
 Vue.config.devtools = true
