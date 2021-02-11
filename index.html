@@ -48,21 +48,18 @@
               <img :src="flagsLink + film.original_language + '/flat'+'/16.png'">
             </template>
             <!-- SEZIONE VOTO -->
-            <template v-if="Math.round(film.vote_avarage)/2==1">
-              <i id="starVote" v-for="(star, index) in arrayStar " class="fas fa-star"> </i>
-            </template>
-            <div class="vote "><i id="starVote" v-for="(star, index) in arrayStar " class="fas fa-star"> </i>
-          </div>
-          <div class="overview">
-            {{film.overview}}
+            <div class="vote ">
+              <i  v-for="index in getVote(film.vote_average) " class="fas fa-star starVote"></i>
+              <i  v-for="index in (5 - getVote(film.vote_average)) " class="far fa-star starVote"></i>
+            </div>
+            <div class="overview">
+              {{film.overview}}
+            </div>
           </div>
         </div>
-
       </div>
     </div>
   </div>
-
-</div>
-<script src="js/script.js" charset="utf-8"></script>
+  <script src="js/script.js" charset="utf-8"></script>
 </body>
 </html>

@@ -74,14 +74,6 @@ cursor: pointer;
   opacity: 0;
 }
 
-.textBox{
-  max-height: 300px;
-  min-width: 450px;
-  max-width: 450px;
-  margin-left: 30px;
-  margin-top: 30px;
-}
-
 .dimensioniAnteprima{
   height: 281px;
   min-width: 500px;
@@ -95,8 +87,16 @@ cursor: pointer;
   position: relative;
 }
 
-.starActive{
-  color: yellow,
+.textBox{
+  max-height: 300px;
+  min-width: 450px;
+  max-width: 450px;
+  margin-left: 30px;
+  margin-top: 30px;
+}
+
+.starVote{
+  color: #eda950;
 }
 
 /* SCROLL BAR */
