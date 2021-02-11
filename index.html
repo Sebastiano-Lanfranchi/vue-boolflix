@@ -37,6 +37,7 @@
             <div class="textBox">
             <div class="titleOriginal">Titolo originale:{{film.original_name}}</div>
             <div class="title">Titolo:{{film.name}}</div>
+            <!-- SEZIONE BANDIERE -->
             <div class="leanguage">
               <p>Lingua originale:</p>
               <template v-if="film.original_language==='en'">
@@ -48,6 +49,14 @@
               <template v-else>
                 <img :src="flagsLink + film.original_language + '/flat'+'/16.png'">
               </template>
+            </div>
+            <!-- SEZIONE VOTO -->
+            <div class="vote">
+              <i  v-for="index in getVote(film.vote_average) " class="fas fa-star starVote"></i>
+              <i  v-for="index in (5 - getVote(film.vote_average)) " class="far fa-star starVote"></i>
+            </div>
+            <div class="overview">
+              {{film.overview}}
             </div>
             </div>
           </template>
@@ -72,6 +81,14 @@
                 <img :src="flagsLink + film.original_language + '/flat'+'/16.png'">
               </template>
             </div>
+            <!-- SEZIONE VOTO -->
+            <div class="vote">
+              <i  v-for="index in getVote(film.vote_average) " class="fas fa-star starVote"></i>
+              <i  v-for="index in (5 - getVote(film.vote_average)) " class="far fa-star starVote"></i>
+            </div>
+            <div class="overview">
+              {{film.overview}}
+            </div>
             </div>
           </template>
           <!-- PERSONE -->
@@ -82,29 +99,13 @@
             <div class="textBox">
             <div class="name">Nome:{{film.name}}</div>
             <div class="professione">Professione:{{film.known_for_department}}</div>
-            <!-- SEZIONE BANDIERE -->
-            <div class="leanguage">
-              <p>Lingua originale:</p>
-              <template v-if="film.origin_country==='en'">
-                <img :src="flagsLink + 'gb' + '/flat'+'/16.png'">
-              </template>
-              <template v-else-if="film.origin_country==='ja'">
-                <img :src="flagsLink + 'jp' + '/flat'+'/16.png'">
-              </template>
-              <template v-else>
-                <img :src="flagsLink + film.origin_country + '/flat'+'/16.png'">
-              </template>
+            <!-- SEZIONE VOTO -->
+            <div class="vote">
+              <i  v-for="index in getVote(film.popularity*2) " class="fas fa-star starVote"></i>
+              <i  v-for="index in (5 - getVote(film.popularity*2)) " class="far fa-star starVote"></i>
             </div>
             </div>
           </template>
-            <!-- SEZIONE VOTO -->
-            <!-- <div class="vote ">
-              <i  v-for="index in getVote(film.vote_average) " class="fas fa-star starVote"></i>
-              <i  v-for="index in (5 - getVote(film.vote_average)) " class="far fa-star starVote"></i>
-            </div> -->
-            <div class="overview">
-              {{film.overview}}
-            </div>
           </div>
         </div>
       </div>
