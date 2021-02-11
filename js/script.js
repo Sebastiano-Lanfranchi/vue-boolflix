@@ -5,6 +5,7 @@ new Vue({
     arrayConfiguration: [],
     arraySearches: [],
     arrayTypology: [],
+    arrayCast: [],
     selectTypology: 'ALL',
     active: true,
     voteStar: 'starActive',
@@ -19,7 +20,6 @@ new Vue({
   methods:{
     searchFunction: function(){
       this.arraySearches = [];
-      this.arraySearches.lenght = 20;
       axios.get('https://api.themoviedb.org/3/search/multi?api_key=e7e03c0fba8d3369b4b91d7184fa6c83&language=it&page=1&include_adult=false&query=' + this.searchMovie)
       .then(response => {
         this.arraySearches = response.data.results;
@@ -39,9 +39,16 @@ new Vue({
     },
     getVote(vote){
       return parseInt(vote/2);
-    }
-
+    },
+    getCredits: function(movie_id){
+      axios.get("https://api.themoviedb.org/3/movie/"+ movie_id +"/credits?api_key=e7e03c0fba8d3369b4b91d7184fa6c83&language=en-US")
+      .then(response => {
+        this.arrayCast.push(response.cast);
+        console.log(this.arrayCast)
+      });
   },
+
+  }
 
 })
 Vue.config.devtools = true

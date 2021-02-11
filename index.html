@@ -89,6 +89,12 @@
             <div class="overview">
               {{film.overview}}
             </div>
+            <div class="buttonCredits" @click="getCredits(film.movie_id)">Show cast</div>
+              <div class="castContainer">
+               <div v-for="actor in arrayCast">
+
+               </div>
+              </div>
             </div>
           </template>
           <!-- PERSONE -->
