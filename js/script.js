@@ -41,10 +41,12 @@ new Vue({
       return parseInt(vote/2);
     },
     getCredits: function(movie_id){
-      axios.get("https://api.themoviedb.org/3/movie/"+ movie_id +"/credits?api_key=e7e03c0fba8d3369b4b91d7184fa6c83&language=en-US")
+      this.arrayCast = [],
+      axios.get("https://api.themoviedb.org/3/movie/"+movie_id+"/credits?api_key=e7e03c0fba8d3369b4b91d7184fa6c83&language=en-US")
       .then(response => {
-        this.arrayCast.push(response.cast);
-        console.log(this.arrayCast)
+        for (var i = 0; i < 5; i++) {
+          this.arrayCast.push(response.data.cast[i])
+        }
       });
   },
 
