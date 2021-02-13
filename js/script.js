@@ -67,6 +67,9 @@ new Vue({
       }
     });
 },
+reloadPage: function(){
+  window.location.reload()
+}
 
   }
 
