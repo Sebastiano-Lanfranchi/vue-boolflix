@@ -93,6 +93,24 @@ cursor: pointer;
   opacity: 1;
 }
 
+.dimensioniAnteprimaPerson{
+  height: 750px;
+  min-width: 500px;
+  max-width: 500px;
+  opacity: 0.8;
+  margin: 10px;
+  box-shadow: #000000 1px 2px ;
+  color: #ccc;
+}
+
+.dimensioniAnteprimaPerson:hover .imagesCover{
+  filter: brightness(0.4);
+}
+
+.dimensioniAnteprimaPerson:hover .textBox{
+  opacity: 1;
+}
+
 .textBox{
   max-height: 250px;
   min-width: 450px;

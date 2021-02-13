@@ -28,9 +28,14 @@
     </header>
     <!-- INSIEME FILM TROVATI -->
     <div class="containerAnteprima">
-      <div class="dimensioniAnteprima" v-for="film in arraySearches" v-if="film.media_type === selectTypology && film.media_type || selectTypology === 'ALL'">
+      <div v-for="film in arraySearches" v-if="film.media_type === selectTypology && film.media_type || selectTypology === 'ALL'">
+        <!-- ALL -->
+        <template v-if="film.media_type === 'ALL'">
+          <div class="dimensioniAnteprima"></div>
+        </template>
           <!-- MOVIE -->
           <template v-if="film.media_type === 'movie'">
+            <div class="dimensioniAnteprima">
             <template v-if="film.backdrop_path !== null">
               <div class="imgResize">
                 <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.backdrop_path" alt="">
@@ -93,9 +98,11 @@
                  </div>
                 </div>
               </div>
+            </div>
             </template>
             <!-- TV -->
             <template v-if="film.media_type === 'tv'">
+              <div class="dimensioniAnteprima">
               <template v-if="film.backdrop_path !== null">
                 <div class="imgResize">
                   <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.backdrop_path" alt="">
@@ -158,12 +165,21 @@
                  </div>
                 </div>
                 </div>
+              </div>
               </template>
           <!-- PERSONE -->
           <template v-if="film.media_type === 'person'">
-            <div class="imgResize">
-              <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.profile_path" alt="">
-            </div>
+            <div class="dimensioniAnteprimaPerson">
+            <template v-if="film.profile_path !== null">
+              <div class="imgResize">
+                <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.profile_path" alt="">
+              </div>
+            </template>
+            <template v-else-if="film.profile_path === null">
+              <div class="imgResize">
+                <img class="imagesCover" src="img/error_404_person.png" alt="">
+              </div>
+            </template>
             <div class="textBox">
             <div class="name">Nome:{{film.name}}</div>
             <div class="professione">Professione:{{film.known_for_department}}</div>
@@ -173,6 +189,7 @@
               <i  v-for="index in (5 - getVote(film.popularity*2)) " class="far fa-star starVote"></i>
             </div>
             </div>
+          </div>
           </template>
           </div>
         </div>
