@@ -67,7 +67,7 @@ cursor: pointer;
 .imagesCover{
   border-radius: 3px;
   transition: 1s;
-  position: absolute;
+  display: inline;
 }
 
 .imagesCover:hover{
@@ -83,8 +83,14 @@ cursor: pointer;
   margin: 10px;
   box-shadow: #000000 1px 2px ;
   color: #ccc;
+}
 
+.dimensioniAnteprima:hover .imagesCover{
+  filter: brightness(0.4);
+}
 
+.dimensioniAnteprima:hover .textBox{
+  opacity: 1;
 }
 
 .textBox{
@@ -96,18 +102,25 @@ cursor: pointer;
   opacity: 0;
   overflow-y: auto;
   overflow-x: hidden;
-  position: relative;
   transition: 1s;
+  position: relative;
+  bottom: 300px;
+
 }
 
-.textBox:hover{
-  opacity: 1;
+.castContainer{
+  display: flex;
+  flex-direction: column;
+  align-content: space-around;
 }
 
-.textBox:hover ~ .imagesCover {
-   filter: brightness(40%),
- }
+.actorsBox{
+  margin-top: 15px;
+}
 
+.actorPicture{
+  vertical-align: middle;
+}
 
 .starVote{
   color: #eda950
