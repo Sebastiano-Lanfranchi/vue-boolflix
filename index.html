@@ -40,6 +40,7 @@
               <div class="imgResize">
                 <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.backdrop_path" alt="">
               </div>
+              </template>
               <div class="textBox">
               <div class="titleOriginal">Titolo originale:{{film.original_name}}</div>
               <div class="title">Titolo:{{film.name}}</div>
@@ -65,7 +66,6 @@
                 {{film.overview}}
               </div>
               </div>
-            </template>
             </template>
           <!-- MOVIE -->
           <template v-if="film.media_type === 'movie'">
@@ -103,7 +103,7 @@
                 {{film.overview}}
               </div>
               <div class="buttonCredits" @click="getCredits(film.id)">Show cast</div>
-                <div class="castContainer">
+                <div class="castContainer" v-if="castSelectedIndex === film.id">
                  <div v-for="actor in arrayCast">
                   <div class="actorsBox">
                    <div class="actorCharacter">

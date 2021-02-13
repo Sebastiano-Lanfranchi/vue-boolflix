@@ -66,13 +66,14 @@ cursor: pointer;
 
 .imagesCover{
   border-radius: 3px;
-  transition: 0.5s;
+  transition: 1s;
   position: absolute;
 }
 
 .imagesCover:hover{
-  opacity: 0;
+
 }
+
 
 .dimensioniAnteprima{
   height: 281px;
@@ -82,18 +83,31 @@ cursor: pointer;
   margin: 10px;
   box-shadow: #000000 1px 2px ;
   color: #ccc;
-  overflow-y: auto;
-  overflow-x: hidden;
-  position: relative;
+
+
 }
 
 .textBox{
-  max-height: 300px;
+  max-height: 250px;
   min-width: 450px;
   max-width: 450px;
   margin-left: 30px;
   margin-top: 30px;
+  opacity: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  transition: 1s;
 }
+
+.textBox:hover{
+  opacity: 1;
+}
+
+.textBox:hover ~ .imagesCover {
+   filter: brightness(40%),
+ }
+
 
 .starVote{
   color: #eda950
