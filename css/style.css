@@ -147,12 +147,25 @@ h1{
   box-shadow: #000000 1px 2px ;
   color: #ccc;
 }
+.textBoxPerson{
+  max-height: 600px;
+  min-width: 450px;
+  max-width: 450px;
+  margin-left: 30px;
+  margin-top: 30px;
+  opacity: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: 1s;
+  position: relative;
+  bottom: 700px;
+}
 
 .dimensioniAnteprimaPerson:hover .imagesCover{
   filter: brightness(0.4);
 }
 
-.dimensioniAnteprimaPerson:hover .textBox{
+.dimensioniAnteprimaPerson:hover .textBoxPerson{
   opacity: 1;
 }
 
@@ -168,7 +181,6 @@ h1{
   transition: 1s;
   position: relative;
   bottom: 300px;
-
 }
 
 .castContainer{

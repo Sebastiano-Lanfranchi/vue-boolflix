@@ -187,7 +187,7 @@
           <h1>Results</h1>
         </template>
         <div class="containerAnteprima">
-          <div v-for="film in arraySearches" v-if="film.media_type === selectTypology && film.media_type || selectTypology === 'ALL' ">
+          <div v-for="(film, index) in arraySearches" v-if="film.media_type === selectTypology && film.media_type || selectTypology === 'ALL' ">
             <!-- MOVIE -->
             <template v-if="film.media_type === 'movie'">
               <div class="dimensioniAnteprima">
@@ -336,7 +336,7 @@
             </template>
             <!-- PERSONE -->
             <template v-if="film.media_type === 'person'">
-              <div class="dimensioniAnteprimaPerson">
+              <div class="dimensioniAnteprimaPerson" @mouseover="changeIndex(index)">
                 <template v-if="film.profile_path !== null">
                   <div class="imgResize">
                     <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.profile_path" alt="">
@@ -347,9 +347,21 @@
                     <img class="imagesCover" src="img/error_404_person.png" alt="">
                   </div>
                 </template>
-                <div class="textBox">
+                <div class="textBoxPerson">
                   <div class="name">Nome:{{film.name}}</div>
                   <div class="professione">Professione:{{film.known_for_department}}</div>
+                  <!-- BOX KNOW FOR -->
+                  <div class="containerKnowFor">
+                    Famoso Per:
+                    <div v-for="know in arraySearches[hoverIndex].known_for">
+                      <div>
+                        Titolo:{{know.original_title}}
+                      </div>
+                      <div>
+                        <img class="imagesCover" :src="arrayConfiguration.base_url + 'w92' + know.poster_path" alt="">
+                      </div>
+                    </div>
+                  </div>
                   <!-- SEZIONE VOTO -->
                 </div>
               </div>
