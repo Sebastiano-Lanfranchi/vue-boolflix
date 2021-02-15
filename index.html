@@ -144,8 +144,14 @@
                   {{film.overview}}
                 </div>
                 <!-- SEZIONE CAST -->
-                <div class="buttonCredits" @click="getCreditsMovie(film.id)">Show cast
-                </div>
+                <template v-if="film.media_type === 'movie'">
+                  <div class="buttonCredits" @click="getCreditsMovie(film.id)">Show cast
+                  </div>
+                </template>
+                <template v-else-if="film.media_type === 'tv'">
+                  <div class="buttonCredits" @click="getCreditsTv(film.id)">Show cast
+                  </div>
+                </template>
                 <div class="castContainer" v-if="castSelectedIndex === film.id">
                   <div v-for="actor in arrayCast">
                     <div class="actorsBox">
@@ -345,10 +351,6 @@
                   <div class="name">Nome:{{film.name}}</div>
                   <div class="professione">Professione:{{film.known_for_department}}</div>
                   <!-- SEZIONE VOTO -->
-                  <div class="vote">
-                    <i  v-for="index in getVote(film.popularity*2) " class="fas fa-star starVote"></i>
-                    <i  v-for="index in (5 - getVote(film.popularity*2)) " class="far fa-star starVote"></i>
-                  </div>
                 </div>
               </div>
             </template>
