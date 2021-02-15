@@ -4,8 +4,10 @@ new Vue({
     searchMovie: '',
     arrayConfiguration: [],
     arraySearches: [],
+    arrayPopular: [],
     arrayTypology: [],
     arrayCast: [],
+    hoverIndex: '0',
     castSelectedIndex: null,
     selectTypology: 'ALL',
     active: true,
@@ -13,10 +15,15 @@ new Vue({
     flagsLink: "https://www.countryflags.io/"
   },
   mounted(){
+    axios.get('https://api.themoviedb.org/3/movie/popular?api_key=e7e03c0fba8d3369b4b91d7184fa6c83&language=it-en&page=1')
+    .then(response=>{
+      this.arrayPopular =response.data.results;
+   });
     axios.get('https://api.themoviedb.org/3/configuration?api_key=e7e03c0fba8d3369b4b91d7184fa6c83')
     .then(response=>{
       this.arrayConfiguration =response.data.images
     })
+
   },
   methods:{
     searchFunction: function(){
@@ -69,7 +76,11 @@ new Vue({
 },
 reloadPage: function(){
   window.location.reload()
-}
+},
+changeIndex: function(index){
+  this.hoverIndex = index;
+  console.log(index)
+},
 
   }
 

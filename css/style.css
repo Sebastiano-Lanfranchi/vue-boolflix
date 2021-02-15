@@ -61,6 +61,51 @@ cursor: pointer;
 }
 
 /* STILI ANTEPRIMA FILMS */
+
+h1{
+  text-align: center;
+  color: #fff;
+}
+.hoverFilm{
+  width: 780px;
+  height: 439px;
+  margin: 0 auto;
+  font-size: 20px;
+}
+.dimensioniAnteprimaBig{
+  height: 439px;
+  min-width: 780px;
+  max-width: 780px;
+  opacity: 0.8;
+  margin: 10px;
+  box-shadow: #000000 1px 2px ;
+  color: #ccc;
+}
+
+.textBoxBig{
+  height: 400px;
+  min-width: 730px;
+  max-width: 730px;
+  margin-left: 30px;
+  margin-top: 30px;
+  opacity: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  transition: 1s;
+  position: relative;
+  bottom: 435px;
+
+}
+
+
+.dimensioniAnteprimaBig:hover .imagesCover{
+  filter: brightness(0.4);
+}
+
+.dimensioniAnteprimaBig:hover .textBoxBig{
+  opacity: 1;
+}
+
 .containerAnteprima{
   display: flex;
   flex-direction: row;
@@ -72,10 +117,6 @@ cursor: pointer;
   border-radius: 3px;
   transition: 1s;
   display: inline;
-}
-
-.imagesCover:hover{
-
 }
 
 
@@ -173,7 +214,7 @@ cursor: pointer;
 
 .buttonCredits{
   background-color: #dc1a28;
-  width: 70px;
+  width: 100px;
   height: 20px;
   border-radius: 5px;
   text-align: center;

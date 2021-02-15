@@ -16,7 +16,7 @@
     <!-- HEADER NAV SELECT -->
     <header>
       <div class="logo">
-        <img src="img/logo.png" @click="reloadPage()" alt="">
+        <img src="img/logo.png" @click="reloadPage" alt="">
       </div>
       <input class="navSearch" type="text" v-model="searchMovie" name="" value="" @keyup.enter="searchFunction">
       <input class="searchButton" type="button" name="" value="Search" @click="searchFunction">
@@ -26,83 +26,83 @@
         <option v-for="typology in arrayTypology">{{typology}}</option>
       </select>
     </header>
-    <!-- INSIEME FILM TROVATI -->
-    <div class="containerAnteprima">
-      <div v-for="film in arraySearches" v-if="film.media_type === selectTypology && film.media_type || selectTypology === 'ALL'">
-        <!-- ALL -->
-        <template v-if="film.media_type === 'ALL'">
-          <div class="dimensioniAnteprima"></div>
-        </template>
-          <!-- MOVIE -->
-          <template v-if="film.media_type === 'movie'">
-            <div class="dimensioniAnteprima">
-            <template v-if="film.backdrop_path !== null">
-              <div class="imgResize">
-                <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.backdrop_path" alt="">
-              </div>
-            </template>
-            <template v-else-if="film.backdrop_path === null">
-              <div class="imgResize">
-                <img class="imagesCover" src="img/error_404.png" alt="">
-              </div>
-            </template>
-              <div class="textBox">
-              <div class="titleOriginal">Titolo originale:{{film.original_title}}</div>
-              <div class="title">Titolo:{{film.title}}</div>
-              <!-- SEZIONE BANDIERE -->
-              <div class="leanguage">
-                <p>Lingua originale:</p>
-                <template v-if="film.original_language==='en'">
-                  <img :src="flagsLink + 'gb' + '/flat'+'/16.png'">
-                </template>
-                <template v-else-if="film.original_language==='ja'">
-                  <img :src="flagsLink + 'jp' + '/flat'+'/16.png'">
-                </template>
-                <template v-else>
-                  <img :src="flagsLink + film.original_language + '/flat'+'/16.png'">
-                </template>
-              </div>
-              <!-- SEZIONE VOTO -->
-              <div class="vote">
-                <i  v-for="index in getVote(film.vote_average) " class="fas fa-star starVote"></i>
-                <i  v-for="index in (5 - getVote(film.vote_average)) " class="far fa-star starVote"></i>
-              </div>
-              <div class="overview">
-                {{film.overview}}
-              </div>
-              <div class="buttonCredits" @click="getCreditsMovie(film.id)">Show cast
-              </div>
-                <div class="castContainer" v-if="castSelectedIndex === film.id">
-                 <div v-for="actor in arrayCast">
-                  <div class="actorsBox">
-                   <div class="actorCharacter">
+    <!-- ANTEPRIMA BIG -->
+    <template v-if="searchMovie === ''">
+      <div class="hoverFilm">
+        <div class="dimensioniAnteprimaBig">
+          <div class="imgResize">
+            <img class="imagesCover" :src="arrayConfiguration.base_url + 'w780' + arrayPopular[hoverIndex].backdrop_path" alt="">
+          </div>
+          <div class="textBoxBig">
+            <div class="titleOriginal">Titolo originale:{{arrayPopular[hoverIndex].original_title}}</div>
+            <div class="title">Titolo:{{arrayPopular[hoverIndex].title}}</div>
+            <!-- SEZIONE BANDIERE -->
+            <div class="leanguage">
+              <p>Lingua originale:</p>
+              <template v-if="arrayPopular[hoverIndex].original_language==='en'">
+                <img :src="flagsLink + 'gb' + '/flat'+'/16.png'">
+              </template>
+              <template v-else-if="arrayPopular[hoverIndex].original_language==='ja'">
+                <img :src="flagsLink + 'jp' + '/flat'+'/16.png'">
+              </template>
+              <template v-else-if="arrayPopular[hoverIndex].original_language==='zh'">
+                <img :src="flagsLink + 'cn' + '/flat'+'/16.png'">
+              </template>
+              <template v-else-if="arrayPopular[hoverIndex].original_language==='ko'">
+                <img :src="flagsLink + 'kr' + '/flat'+'/16.png'">
+              </template>
+              <template v-else>
+                <img :src="flagsLink + arrayPopular[hoverIndex].original_language + '/flat'+'/16.png'">
+              </template>
+            </div>
+            <!-- SEZIONE VOTO -->
+            <div class="vote">
+              <i  v-for="index in getVote(arrayPopular[hoverIndex].vote_average) " class="fas fa-star starVote"></i>
+              <i  v-for="index in (5 - getVote(arrayPopular[hoverIndex].vote_average)) " class="far fa-star starVote"></i>
+            </div>
+            <div class="overview">
+              {{arrayPopular[hoverIndex].overview}}
+            </div>
+            <!-- SEZIONE CAST -->
+            <div class="buttonCredits" @click="getCreditsMovie(arrayPopular[hoverIndex].id)">Show cast
+            </div>
+            <div class="castContainer" v-if="castSelectedIndex === arrayPopular[hoverIndex].id">
+              <div v-for="actor in arrayCast">
+                <div class="actorsBox">
+                  <div class="actorCharacter">
 
-                     <template v-if="actor.character === 'Self'">
-                       Attore: {{actor.name}}
-                     </template>
-                     <template v-else>
-                       Personaggio:{{actor.character}}
-                     </template>
-                     <template v-if="actor.profile_path !== null">
-                       <span class="containerActorePicture">
-                       <img class="actorPicture" :src="arrayConfiguration.base_url + 'w45' + actor.profile_path" alt="">
-                     </span>
-                     </template>
-                     <template v-else-if="actor.profile_path === null">
-                       <span>
-                         <img class="actorPicture" src="img/no_profile_picture.png" alt="">
-                       </span>
-                   </template>
-                   </div>
+                    <template v-if="actor.character === 'Self'">
+                      Attore: {{actor.name}}
+                    </template>
+                    <template v-else>
+                      Personaggio:{{actor.character}}
+                    </template>
+                    <template v-if="actor.profile_path !== null">
+                      <span class="containerActorePicture">
+                        <img class="actorPicture" :src="arrayConfiguration.base_url + 'w45' + actor.profile_path" alt="">
+                      </span>
+                    </template>
+                    <template v-else-if="actor.profile_path === null">
+                      <span>
+                        <img class="actorPicture" src="img/no_profile_picture.png" alt="">
+                      </span>
+                    </template>
                   </div>
-                 </div>
                 </div>
               </div>
             </div>
-            </template>
-            <!-- TV -->
-            <template v-if="film.media_type === 'tv'">
-              <div class="dimensioniAnteprima">
+          </div>
+        </div>
+        </div>
+       <!-- SECTION TITOL -->
+        <div class="sectionTitol">
+          <h1>Popular films</h1>
+        </div>
+        <div class="containerAnteprima">
+          <br>
+          <template v-for="(film, index) in arrayPopular" >
+            <!-- ALL-POPULAR -->
+            <div class="dimensioniAnteprima" @mouseover="changeIndex(index)">
               <template v-if="film.backdrop_path !== null">
                 <div class="imgResize">
                   <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.backdrop_path" alt="">
@@ -113,9 +113,9 @@
                   <img class="imagesCover" src="img/error_404.png" alt="">
                 </div>
               </template>
-                <div class="textBox">
-                <div class="titleOriginal">Titolo originale:{{film.original_name}}</div>
-                <div class="title">Titolo:{{film.name}}</div>
+              <div class="textBox">
+                <div class="titleOriginal">Titolo originale:{{film.original_title}}</div>
+                <div class="title">Titolo:{{film.title}}</div>
                 <!-- SEZIONE BANDIERE -->
                 <div class="leanguage">
                   <p>Lingua originale:</p>
@@ -124,6 +124,12 @@
                   </template>
                   <template v-else-if="film.original_language==='ja'">
                     <img :src="flagsLink + 'jp' + '/flat'+'/16.png'">
+                  </template>
+                  <template v-else-if="film.original_language==='zh'">
+                    <img :src="flagsLink + 'cn' + '/flat'+'/16.png'">
+                  </template>
+                  <template v-else-if="film.original_language==='ko'">
+                    <img :src="flagsLink + 'kr' + '/flat'+'/16.png'">
                   </template>
                   <template v-else>
                     <img :src="flagsLink + film.original_language + '/flat'+'/16.png'">
@@ -137,63 +143,218 @@
                 <div class="overview">
                   {{film.overview}}
                 </div>
-                <div class="buttonCredits" @click="getCreditsTv(film.id)">Show cast
+                <!-- SEZIONE CAST -->
+                <div class="buttonCredits" @click="getCreditsMovie(film.id)">Show cast
                 </div>
                 <div class="castContainer" v-if="castSelectedIndex === film.id">
-                 <div v-for="actor in arrayCast">
-                  <div class="actorsBox">
-                   <div class="actorCharacter">
+                  <div v-for="actor in arrayCast">
+                    <div class="actorsBox">
+                      <div class="actorCharacter">
 
-                     <template v-if="actor.character === 'Self'">
-                       Attore: {{actor.name}}
-                     </template>
-                     <template v-else>
-                       Personaggio:{{actor.character}}
-                     </template>
-                     <template v-if="actor.profile_path !== null">
-                       <span class="containerActorePicture">
-                       <img class="actorPicture" :src="arrayConfiguration.base_url + 'w45' + actor.profile_path" alt="">
-                     </span>
-                     </template>
-                     <template v-else-if="actor.profile_path === null">
-                       <span>
-                         <img class="actorPicture" src="img/no_profile_picture.png" alt="">
-                       </span>
-                   </template>
-                   </div>
+                        <template v-if="actor.character === 'Self'">
+                          Attore: {{actor.name}}
+                        </template>
+                        <template v-else>
+                          Personaggio:{{actor.character}}
+                        </template>
+                        <template v-if="actor.profile_path !== null">
+                          <span class="containerActorePicture">
+                            <img class="actorPicture" :src="arrayConfiguration.base_url + 'w45' + actor.profile_path" alt="">
+                          </span>
+                        </template>
+                        <template v-else-if="actor.profile_path === null">
+                          <span>
+                            <img class="actorPicture" src="img/no_profile_picture.png" alt="">
+                          </span>
+                        </template>
+                      </div>
+                    </div>
                   </div>
-                 </div>
-                </div>
                 </div>
               </div>
-              </template>
-          <!-- PERSONE -->
-          <template v-if="film.media_type === 'person'">
-            <div class="dimensioniAnteprimaPerson">
-            <template v-if="film.profile_path !== null">
-              <div class="imgResize">
-                <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.profile_path" alt="">
-              </div>
-            </template>
-            <template v-else-if="film.profile_path === null">
-              <div class="imgResize">
-                <img class="imagesCover" src="img/error_404_person.png" alt="">
-              </div>
-            </template>
-            <div class="textBox">
-            <div class="name">Nome:{{film.name}}</div>
-            <div class="professione">Professione:{{film.known_for_department}}</div>
-            <!-- SEZIONE VOTO -->
-            <div class="vote">
-              <i  v-for="index in getVote(film.popularity*2) " class="fas fa-star starVote"></i>
-              <i  v-for="index in (5 - getVote(film.popularity*2)) " class="far fa-star starVote"></i>
             </div>
-            </div>
-          </div>
           </template>
+
+        </template>
+        <!-- INSIEME FILM TROVATI -->
+        <template v-if="searchMovie !== ''">
+          <h1>Results</h1>
+        </template>
+        <div class="containerAnteprima">
+          <div v-for="film in arraySearches" v-if="film.media_type === selectTypology && film.media_type || selectTypology === 'ALL' ">
+            <!-- MOVIE -->
+            <template v-if="film.media_type === 'movie'">
+              <div class="dimensioniAnteprima">
+                <template v-if="film.backdrop_path !== null">
+                  <div class="imgResize">
+                    <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.backdrop_path" alt="">
+                  </div>
+                </template>
+                <template v-else-if="film.backdrop_path === null">
+                  <div class="imgResize">
+                    <img class="imagesCover" src="img/error_404.png" alt="">
+                  </div>
+                </template>
+                <div class="textBox">
+                  <div class="titleOriginal">Titolo originale:{{film.original_title}}</div>
+                  <div class="title">Titolo:{{film.title}}</div>
+                  <!-- SEZIONE BANDIERE -->
+                  <div class="leanguage">
+                    <p>Lingua originale:</p>
+                    <template v-if="film.original_language==='en'">
+                      <img :src="flagsLink + 'gb' + '/flat'+'/16.png'">
+                    </template>
+                    <template v-else-if="film.original_language==='ja'">
+                      <img :src="flagsLink + 'jp' + '/flat'+'/16.png'">
+                    </template>
+                    <template v-else-if="film.original_language==='zh'">
+                      <img :src="flagsLink + 'cn' + '/flat'+'/16.png'">
+                    </template>
+                    <template v-else-if="film.original_language==='ko'">
+                      <img :src="flagsLink + 'kr' + '/flat'+'/16.png'">
+                    </template>
+                    <template v-else>
+                      <img :src="flagsLink + film.original_language + '/flat'+'/16.png'">
+                    </template>
+                  </div>
+                  <!-- SEZIONE VOTO -->
+                  <div class="vote">
+                    <i  v-for="index in getVote(film.vote_average) " class="fas fa-star starVote"></i>
+                    <i  v-for="index in (5 - getVote(film.vote_average)) " class="far fa-star starVote"></i>
+                  </div>
+                  <div class="overview">
+                    {{film.overview}}
+                  </div>
+                  <div class="buttonCredits" @click="getCreditsMovie(film.id)">Show cast
+                  </div>
+                  <div class="castContainer" v-if="castSelectedIndex === film.id">
+                    <div v-for="actor in arrayCast">
+                      <div class="actorsBox">
+                        <div class="actorCharacter">
+
+                          <template v-if="actor.character === 'Self'">
+                            Attore: {{actor.name}}
+                          </template>
+                          <template v-else>
+                            Personaggio:{{actor.character}}
+                          </template>
+                          <template v-if="actor.profile_path !== null">
+                            <span class="containerActorePicture">
+                              <img class="actorPicture" :src="arrayConfiguration.base_url + 'w45' + actor.profile_path" alt="">
+                            </span>
+                          </template>
+                          <template v-else-if="actor.profile_path === null">
+                            <span>
+                              <img class="actorPicture" src="img/no_profile_picture.png" alt="">
+                            </span>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <!-- TV -->
+            <template v-if="film.media_type === 'tv'">
+              <div class="dimensioniAnteprima">
+                <template v-if="film.backdrop_path !== null">
+                  <div class="imgResize">
+                    <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.backdrop_path" alt="">
+                  </div>
+                </template>
+                <template v-else-if="film.backdrop_path === null">
+                  <div class="imgResize">
+                    <img class="imagesCover" src="img/error_404.png" alt="">
+                  </div>
+                </template>
+                <div class="textBox">
+                  <div class="titleOriginal">Titolo originale:{{film.original_name}}</div>
+                  <div class="title">Titolo:{{film.name}}</div>
+                  <!-- SEZIONE BANDIERE -->
+                  <div class="leanguage">
+                    <p>Lingua originale:</p>
+                    <template v-if="film.original_language==='en'">
+                      <img :src="flagsLink + 'gb' + '/flat'+'/16.png'">
+                    </template>
+                    <template v-else-if="film.original_language==='ja'">
+                      <img :src="flagsLink + 'jp' + '/flat'+'/16.png'">
+                    </template>
+                    <template v-else-if="film.original_language==='zh'">
+                      <img :src="flagsLink + 'cn' + '/flat'+'/16.png'">
+                    </template>
+                    <template v-else-if="film.original_language==='ko'">
+                      <img :src="flagsLink + 'kr' + '/flat'+'/16.png'">
+                    </template>
+                    <template v-else>
+                      <img :src="flagsLink + film.original_language + '/flat'+'/16.png'">
+                    </template>
+                  </div>
+                  <!-- SEZIONE VOTO -->
+                  <div class="vote">
+                    <i  v-for="index in getVote(film.vote_average) " class="fas fa-star starVote"></i>
+                    <i  v-for="index in (5 - getVote(film.vote_average)) " class="far fa-star starVote"></i>
+                  </div>
+                  <div class="overview">
+                    {{film.overview}}
+                  </div>
+                  <div class="buttonCredits" @click="getCreditsTv(film.id)">Show cast
+                  </div>
+                  <div class="castContainer" v-if="castSelectedIndex === film.id">
+                    <div v-for="actor in arrayCast">
+                      <div class="actorsBox">
+                        <div class="actorCharacter">
+
+                          <template v-if="actor.character === 'Self'">
+                            Attore: {{actor.name}}
+                          </template>
+                          <template v-else>
+                            Personaggio:{{actor.character}}
+                          </template>
+                          <template v-if="actor.profile_path !== null">
+                            <span class="containerActorePicture">
+                              <img class="actorPicture" :src="arrayConfiguration.base_url + 'w45' + actor.profile_path" alt="">
+                            </span>
+                          </template>
+                          <template v-else-if="actor.profile_path === null">
+                            <span>
+                              <img class="actorPicture" src="img/no_profile_picture.png" alt="">
+                            </span>
+                          </template>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </template>
+            <!-- PERSONE -->
+            <template v-if="film.media_type === 'person'">
+              <div class="dimensioniAnteprimaPerson">
+                <template v-if="film.profile_path !== null">
+                  <div class="imgResize">
+                    <img class="imagesCover" :src="arrayConfiguration.base_url + 'w500' + film.profile_path" alt="">
+                  </div>
+                </template>
+                <template v-else-if="film.profile_path === null">
+                  <div class="imgResize">
+                    <img class="imagesCover" src="img/error_404_person.png" alt="">
+                  </div>
+                </template>
+                <div class="textBox">
+                  <div class="name">Nome:{{film.name}}</div>
+                  <div class="professione">Professione:{{film.known_for_department}}</div>
+                  <!-- SEZIONE VOTO -->
+                  <div class="vote">
+                    <i  v-for="index in getVote(film.popularity*2) " class="fas fa-star starVote"></i>
+                    <i  v-for="index in (5 - getVote(film.popularity*2)) " class="far fa-star starVote"></i>
+                  </div>
+                </div>
+              </div>
+            </template>
           </div>
         </div>
       </div>
-  <script src="js/script.js" charset="utf-8"></script>
-</body>
-</html>
+      <script src="js/script.js" charset="utf-8"></script>
+    </body>
+    </html>
